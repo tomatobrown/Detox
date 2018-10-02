@@ -1,19 +1,14 @@
 {
-  "name": "rbh",
-  "version": "3.21.0",
+  "name": "demo-react-native-cucumber",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "android:build-detox": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
     "android:test-detox": "react-native run-android && detox build -c android.emu.release.27 && detox test --cleanup -c android.emu.release.27",
-    "bump_package_version": "node pipeline/versioning/set-pipelineid-as-patch-version.js",
     "ios:build-detox": "detox build -c ios.sim.release",
     "ios:test-detox": "detox test --cleanup -l silent -c ios.sim.release",
     "lint-fix": "eslint '**/*.js' --fix --ignore-path .eslintignore",
-    "lint": "eslint '**/*.js' --ignore-path .eslintignore",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "translate-export": "node ./configuration/translate/translateExport.js",
-    "translate-import": "node ./configuration/translate/translateImport.js"
+    "lint": "eslint '**/*.js' --ignore-path .eslintignore"
   },
   "dependencies": {
     "react": "16.0.0",
@@ -23,46 +18,19 @@
     "chai": "^4.1.2",
     "cucumber": "4.0.0",
     "cuke-skywalker": "^1.0.4",
-    "detox": "^9.0.1",
-    "react-test-renderer": "16.0.0",
-  },
-  "jest": {
-    "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./src/assets/fonts"
-    ]
+    "detox": "^9.0.3",
+    "react-test-renderer": "16.0.0"
   },
   "detox": {
     "test-runner": "jest",
     "specs": "e2e",
     "configurations": {
       "ios.sim.release": {
-        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/DemoReactNativeJest.app",
-        "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -project ios/DemoReactNativeJest.xcodeproj -UseNewBuildSystem=NO -scheme DemoReactNativeJest -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet",
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/example.app",
+        "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -project ios/example.xcodeproj -scheme example -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet",
         "type": "ios.simulator",
         "name": "iPhone 7 Plus"
-      },
-      "ios.sim.debug": {
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/DemoReactNativeJest.app",
-        "build": "xcodebuild -project ios/DemoReactNativeJest.xcodeproj -UseNewBuildSystem=NO -scheme DemoReactNativeJest -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "name": "iPhone 7 Plus"
-      },
-      "android.emu.debug": {
-        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-        "build": "pushd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && popd",
-        "type": "android.emulator",
-        "name": "Nexus_5X_API_26"
-      },
-      "android.emu.release": {
-        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
-        "build": "pushd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && popd",
-        "type": "android.emulator",
-        "name": "Nexus_5X_API_26"
       }
     }
   }
-}
 }

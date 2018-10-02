@@ -1,4 +1,4 @@
-Cucumber JS 4 Mobile using Detox
+Cucumber Detox Example
 =================
 
 Automated tests for Mobile RBH apps
@@ -22,7 +22,7 @@ brew install --HEAD applesimutils
 yarn install
 cd ios && pod install --repo-update && cd ..
 npm rebuild
-npm run detox-build
+detox build -c ios.sim.release
 ```
 
 After initial build and setup, rerunning all of these steps is not always needed.  This will depend on the state of the app and it is most common
@@ -32,24 +32,9 @@ to run `yarn install` and/or `detox build` after updates are applied.
 Running Tests
 -------------
 ```shell
-cd demo-cucumber 
-configuration="ios.sim.release" PLATFORM="none" ENVIRONMENT="test1" node ../node_modules/cucumber/bin/cucumber-js
+cd demo-react-native-cucumber 
+configuration="ios.sim.release" node ../node_modules/cucumber/bin/cucumber-js
 ```
 
-Relevant Environment Variables
----------------------------------
-  * configuration - (string) targets one of the builds listed in config.json
-  
-  ** note that any detox test commandline arguments can be passed in as an environment variable 
+
    
-
-
-Tip
----------------------------------
-Create a symlink to the rbh-cucumber-js node module to have autofill access to steps that exist in that module.
-
-from /cucumber/feature/step_definitions run the following
-```shell
-ln -s ../../../node_modules/rbh-cucumber-js/step_definitions rbh-cucumber-js
-```
-* please do not check-in the symlink file

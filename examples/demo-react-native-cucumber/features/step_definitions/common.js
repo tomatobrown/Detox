@@ -1,5 +1,4 @@
 /* eslint-disable func-names */
-
 const {When, Then} = require('cucumber');
 
 Then(/^the following text is visible:$/, async function (table) {
